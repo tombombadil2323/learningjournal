@@ -4,6 +4,7 @@ import '../../w3.css';
 import Journal from '../Journal/Journal';
 import { Link } from 'react-router-dom';
 import Aux from '../../hoc/Aux/Aux';
+import Remarkable from 'remarkable';
 
 class JournalEntryPreview extends Component {
     constructor(props) {
@@ -19,11 +20,13 @@ class JournalEntryPreview extends Component {
             //new simplified code:
             let entries = snapshot.val(); 
             let newState = [];
+            let markDownEngine = new Remarkable();
+            markDownEngine.set({linkify: true,});
             for (let entry in entries) {    
                 newState.push({
                     entryID: entry,
-                    title: entries[entry].title,
-                    body: entries[entry].body,
+                    title: markDownEngine.render(entries[entry].title),
+                    body: markDownEngine.render(entries[entry].body),
                     bodyShort: entries[entry].body.toString().slice(0,200),
                     date: entries[entry].date                 
                 });

@@ -8,8 +8,7 @@ const Journal = (props) => {
         <Aux>
         <div className='w3-container w3-panel w3-card w3-sand Journal' style={{height: '100%'}}>
                 <div className = 'w3-container w3-opacity'>{props.date}</div>
-                <div className = 'w3-container' style={props.titleStyle}>
-                        {props.title}
+                <div className = 'w3-container' style={props.titleStyle} dangerouslySetInnerHTML={{__html: props.title}}>
                 </div>
                 <div 
                     className = 'w3-container' 
@@ -18,8 +17,9 @@ const Journal = (props) => {
                         whiteSpace: 'pre-wrap',
                         textAlign:'left',
                         height: '100%',
-                        }}>
-                    {props.body}
+                        }}
+                        dangerouslySetInnerHTML={{__html: props.body}}        
+                >
                 </div>
             </div>        
         </Aux>

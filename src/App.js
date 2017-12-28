@@ -15,11 +15,11 @@
 //DONE conditional change of height of title 
 //DONE add impressum
 //add hashtags and icons to add and remove them
-//add markdown
+//DONE add markdown
 //add search
 //add sharing
-//add github and integrate git
-//add git and learn
+//DONE add github and integrate git
+//DONE add git and learn
 //rebuild database structure to have seperate folders beneath userfolder
 
 
