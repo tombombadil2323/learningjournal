@@ -66,9 +66,7 @@ constructor(props) {
                    <div align='center' style={{marginTop: '70px'}}>
                             <div className='w3-container w3-card-4 w3-light-grey ' style={{maxWidth: '1000px', paddingTop:'10px', paddingLeft:'0px', paddingRight:'0px'}}>                           
                                 <JournalTitle changedTitle ={this.titleHandler} text = {this.state.currentTitle}/>
-                                <JournalBody changedBody = {this.bodyHandler} text = {this.state.currentBody}/>
-                                <Addtag/>
-                                <Hashtag/>        
+                                <JournalBody changedBody = {this.bodyHandler} text = {this.state.currentBody}/>       
                             <p className='w3-container'>
                                 <Button clicked={this.buttonClickHandler} btnType={buttonStyleType()}>Save Entry</Button>
                             </p>
