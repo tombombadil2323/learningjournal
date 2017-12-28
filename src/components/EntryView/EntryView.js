@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import Journal from '../Journal/Journal';
 import Button from '../Button/Button';
 import Aux from '../../hoc/Aux/Aux';
+import Remarkable from 'remarkable';
 
 class EntryView extends Component {
     constructor(props) {
@@ -18,6 +19,8 @@ class EntryView extends Component {
             currentBody: '',
             prevTitle: '',
             prevBody: '',
+            viewCurrentTitle: '',
+            viewCurrentBody: '',
             date:'',
             editToggle: false,
             removeCheckSet: false,
@@ -30,6 +33,8 @@ class EntryView extends Component {
         rootRef.on("value", snapshot => {
             //new simplified code:
             let entries = snapshot.val(); 
+            let markDownEngine = new Remarkable();
+            markDownEngine.set({linkify: true,});
             for (let entry in entries) {    
                 if (entry === this.props.location.state.entryID)
                 {
@@ -38,6 +43,8 @@ class EntryView extends Component {
                         currentBody: entries[entry].body,
                         prevTitle: entries[entry].title,
                         prevBody: entries[entry].body,
+                        viewCurrentTitle: markDownEngine.render(entries[entry].title),
+                        viewCurrentBody: markDownEngine.render(entries[entry].body),
                         date: entries[entry].date,
                     })
                 }
@@ -149,8 +156,8 @@ class EntryView extends Component {
                                         <div onClick={this.editToggleClickHandler}>
                                             <Journal
                                                 entryID={this.state.entryID}
-                                                title ={this.state.currentTitle} 
-                                                body={this.state.currentBody} 
+                                                title ={this.state.viewCurrentTitle} 
+                                                body={this.state.viewCurrentBody} 
                                                 date={this.state.date}
                                                 titleStyle={{
                                                     overflow: 'hidden',
