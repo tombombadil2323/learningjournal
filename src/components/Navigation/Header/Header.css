@@ -1,0 +1,19 @@
+.Header {
+    align-content: center;
+    color: #e403a0;
+    background-color: #442c08;
+    padding: 10px;
+    margin: 10px;
+    display: box-block;
+    font-family: monospace;
+    font-variant: small-caps;
+    font-size: 2.5em;
+    text-align: center;
+    box-sizing: 100%;
+    text-shadow: 1px 1px grey;
+    list-style-type:none;
+}
+
+.Header li {
+    display: inline;
+}

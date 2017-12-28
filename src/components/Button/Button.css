@@ -1,0 +1,56 @@
+.Button {
+    background-color:transparent;
+    border: none;
+    color: white;
+    outline: none;
+    cursor: pointer;
+    font: inherit;
+    padding: 10px;
+    margin: 10px;
+    font-weight: bold;
+    width: 120px;
+    display: block;
+}
+/* 
+.Button:first-of-type {
+    margin-left: 0;
+    padding-left: 0;
+} */
+
+.Save {
+    background-color: #5C9210;
+    color: #ffffff;
+}
+
+.SaveEmpty {
+    background-color: #5C9210;
+    color: #ffffff;
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+.Edit {
+    background-color: darkblue;
+    color: #ffffff;
+}
+.Back {
+    background-color: gold;
+    color: #ffffff;
+}
+.Remove {
+    background-color: purple;
+    color: #ffffff;
+}
+.RemoveEmpty {
+    background-color: purple;
+    opacity: 0.5;
+    color: #ffffff;
+    cursor: not-allowed;
+}
+.TagButton {
+    display: inline-flex;
+    background-color: lightgoldenrodyellow;
+    color: black;
+    height: 26px;
+    margin: 0px;
+    text-align: center;
+}

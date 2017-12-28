@@ -1,0 +1,32 @@
+[debug] [2017-12-09T11:59:15.048Z] ----------------------------------------------------------------------
+[debug] [2017-12-09T11:59:15.053Z] Command:       /usr/local/bin/node /usr/local/bin/firebase serve
+[debug] [2017-12-09T11:59:15.054Z] CLI Version:   3.16.0
+[debug] [2017-12-09T11:59:15.054Z] Platform:      darwin
+[debug] [2017-12-09T11:59:15.054Z] Node Version:  v9.2.0
+[debug] [2017-12-09T11:59:15.058Z] Time:          Sat Dec 09 2017 12:59:15 GMT+0100 (CET)
+[debug] [2017-12-09T11:59:15.058Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2017-12-09T11:59:15.101Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2017-12-09T11:59:15.102Z] > authorizing via signed-in user
+[debug] [2017-12-09T11:59:15.107Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/learning-journal-a0f04  
+  
+ Sat Dec 09 2017 12:59:15 GMT+0100 (CET)
+[debug] [2017-12-09T11:59:16.234Z] <<< HTTP RESPONSE 200
+[debug] [2017-12-09T11:59:16.235Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/learning-journal-a0f04/tokens  
+  
+ Sat Dec 09 2017 12:59:16 GMT+0100 (CET)
+[debug] [2017-12-09T11:59:16.971Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from '/Users/tom/Projects/learning-journal'...
+[info] 
+[debug] [2017-12-09T11:59:16.977Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/learning-journal-a0f04  
+  
+ Sat Dec 09 2017 12:59:16 GMT+0100 (CET)
+[debug] [2017-12-09T11:59:18.028Z] <<< HTTP RESPONSE 200
+[debug] [2017-12-09T11:59:18.031Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/256839299651/clients/_:getWebAppConfig  
+  
+ Sat Dec 09 2017 12:59:18 GMT+0100 (CET)
+[debug] [2017-12-09T11:59:18.932Z] <<< HTTP RESPONSE 200
+[info] i  hosting: Serving hosting files from: build
+[info] ✔  hosting: Local server: http://localhost:5000
+

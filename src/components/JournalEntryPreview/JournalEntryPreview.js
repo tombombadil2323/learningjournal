@@ -1,0 +1,76 @@
+import React, { Component } from 'react';
+import firebase from '../../javascripts/firebase';
+import '../../w3.css';
+import Journal from '../Journal/Journal';
+import { Link } from 'react-router-dom';
+import Aux from '../../hoc/Aux/Aux';
+
+class JournalEntryPreview extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            entry: [],
+        }
+    }
+    componentDidMount() {
+        //gets data of user from database and sets entry array
+        const rootRef = firebase.database().ref(`journalentries/${this.props.user.uid}`);
+        rootRef.on("value", snapshot => {
+            //new simplified code:
+            let entries = snapshot.val(); 
+            let newState = [];
+            for (let entry in entries) {    
+                newState.push({
+                    entryID: entry,
+                    title: entries[entry].title,
+                    body: entries[entry].body,
+                    bodyShort: entries[entry].body.toString().slice(0,200),
+                    date: entries[entry].date                 
+                });
+            }
+            newState.reverse();
+            this.setState({
+                entry: newState
+            });
+        });
+    }
+
+    render() {
+         //displays the list of entries with remove button
+         const joined = this.state.entry.map((entry)=>{            
+            return (
+                <div key={entry.entryID}>
+                    <div className='w3-card-4 w3-light-grey' align='center' style={{paddingTop:'2px', paddingBottom:'2px', maxWidth: '1000px', textOverflow: 'ellipsis'}}>
+                        <Link to={{
+                        pathname:'/journalentryview',
+                        state:{entryID: entry.entryID}
+                        }} style={{textDecoration:'none'}}>
+                            <Journal
+                                entryID={entry.entryID}
+                                title ={entry.title} 
+                                date={entry.date.slice(0,16).toString()}
+                                titleStyle={{
+                                    textOverflow: 'ellipsis', 
+                                    overflow: 'hidden', 
+                                    whiteSpace: 'nowrap', 
+                                    maxHeight:'70px',
+                                    fontStyle: 'italic',
+                                }}
+                            />                              
+                        </Link>         
+                    </div>
+                    <p></p>                                                 
+                </div>
+            );
+        });
+        return (
+            <Aux>
+                <div align='center' style={{marginTop: '70px', marginBottom: '30px'}}>
+                    <div style={{maxWidth: '1000px'}} align='center' >{joined}</div>
+                </div> 
+            </Aux>       
+        );
+    }
+}
+
+export default JournalEntryPreview;
