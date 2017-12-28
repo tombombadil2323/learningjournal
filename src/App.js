@@ -14,7 +14,7 @@
 //DONE change loading status
 //DONE conditional change of height of title 
 //DONE add impressum
-//add hashtags and icons to add and remove them
+//add hashtags
 //DONE add markdown
 //add search
 //add sharing
