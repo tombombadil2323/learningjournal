@@ -19,7 +19,7 @@
 //add search
 //add sharing
 //add github
-//add git
+//add git and learn
 //rebuild database structure to have seperate folders beneath userfolder
 
 
