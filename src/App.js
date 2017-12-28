@@ -18,6 +18,7 @@
 //add markdown
 //add search
 //add sharing
+//add github
 //rebuild database structure to have seperate folders beneath userfolder
 
 
