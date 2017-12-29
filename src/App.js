@@ -14,8 +14,9 @@
 //DONE change loading status
 //DONE conditional change of height of title 
 //DONE add impressum
-//add hashtags
+//add hashtags: extract tags w/o duplicates from db
 //DONE add markdown
+//fix markdown: div style in entry preview,
 //add search
 //add sharing
 //DONE add github and integrate git

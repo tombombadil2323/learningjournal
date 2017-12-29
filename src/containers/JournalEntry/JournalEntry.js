@@ -16,6 +16,8 @@ constructor(props) {
     this.state = {
         currentTitle: '',
         currentBody: '',
+        currentTag: '',
+        tags:[],
     }
 }
 
@@ -24,17 +26,16 @@ constructor(props) {
         if (!this.state.currentTitle.length && !this.state.currentBody.length) {
             return;
         }
-        //cleans database:
-        //const del = firebase.database().ref().set("");
 
         //push inputs from textareas to database
-        const rootRef = firebase.database().ref().child('journalentries');
-        const itemRef = rootRef.child(this.props.user.uid);
-        itemRef.push({
+        const rootRef = firebase.database().ref(`journalentries/${this.props.user.uid}`);
+        rootRef.push({
             title: this.state.currentTitle,
             body: this.state.currentBody, 
             date: Date().toString(),
+            tags: this.state.tags,
         });
+
         //empties the textareas
         this.setState({
             currentTitle:'',
@@ -49,6 +50,25 @@ constructor(props) {
     //sets state with body inputs
     bodyHandler = (event) => {
         this.setState({currentBody: event.target.value});
+    };
+
+    tagHandler= (event) => {
+        this.setState({currentTag: event.target.value});
+    };
+
+    addTagClickHandler = ()=> {
+        if (!this.state.currentTag.length) {
+            return;
+        }
+        // const rootRef = firebase.database().ref(`journalentries/${this.props.user.uid}/hashtags`);
+        this.setState((prevState)=>{
+            let newState = [];
+            newState = prevState.tags;
+            newState.push(this.state.currentTag);
+            return {tags : newState};
+        }
+    );
+        this.setState({currentTag:''});
     };
     
     render (){
@@ -67,11 +87,8 @@ constructor(props) {
                             <div className='w3-container w3-card-4 w3-light-grey ' style={{maxWidth: '1000px', paddingTop:'10px', paddingLeft:'0px', paddingRight:'0px'}}>                           
                                 <JournalTitle changedTitle ={this.titleHandler} text = {this.state.currentTitle}/>
                                 <JournalBody changedBody = {this.bodyHandler} text = {this.state.currentBody}/>
-                                <Addtag/>
-                                <Hashtag/>        
-                            <p className='w3-container'>
+                                <Addtag addTagClickHandler={this.addTagClickHandler} tagHandler={this.tagHandler} inputValue={this.state.currentTag}/>
                                 <Button clicked={this.buttonClickHandler} btnType={buttonStyleType()}>Save Entry</Button>
-                            </p>
                         </div>
                     </div>
             </Aux>

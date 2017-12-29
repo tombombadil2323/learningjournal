@@ -27,7 +27,6 @@ class JournalEntryPreview extends Component {
                     entryID: entry,
                     title: markDownEngine.render(entries[entry].title),
                     body: markDownEngine.render(entries[entry].body),
-                    bodyShort: entries[entry].body.toString().slice(0,200),
                     date: entries[entry].date                 
                 });
             }

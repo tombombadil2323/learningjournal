@@ -2,6 +2,7 @@ import React from 'react';
 import './Journal.css';
 import Aux from '../../hoc/Aux/Aux';
 import '../../w3.css';
+import '../../'
 
 const Journal = (props) => {
     return (
@@ -11,7 +12,7 @@ const Journal = (props) => {
                 <div className = 'w3-container' style={props.titleStyle} dangerouslySetInnerHTML={{__html: props.title}}>
                 </div>
                 <div 
-                    className = 'w3-container' 
+                    className = 'w3-container EntryView' 
                     style={{ 
                         overflow: 'hidden',
                         whiteSpace: 'pre-wrap',

@@ -10,3 +10,18 @@
 .Title {
     padding: 10px;
 }
+.EntryView div {
+    line-height: 1.0;
+}
+.EntryView p {
+    line-height: 1.0;
+}
+.EntryView ul {
+    line-height: 1.0;
+    padding: 0px;
+    margin: 0px;
+}
+.EntryView il {
+    line-height: 1.0;
+}
+

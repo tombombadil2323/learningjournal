@@ -153,7 +153,7 @@ class EntryView extends Component {
                             <Aux>
                                 <div align='center' style={{marginTop:'70px', minHeight:'100%', marginBottom: '30px'}}>
                                     <div className='w3-card-4 w3-light-grey' align='center' style={{paddingTop:'2px', paddingBottom:'2px', maxWidth: '1000px'}}>
-                                        <div onClick={this.editToggleClickHandler}>
+                                        <div className='EntryView' onClick={this.editToggleClickHandler}>
                                             <Journal
                                                 entryID={this.state.entryID}
                                                 title ={this.state.viewCurrentTitle} 
