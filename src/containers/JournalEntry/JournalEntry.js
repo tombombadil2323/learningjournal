@@ -11,22 +11,25 @@ import Addtag from '../../components/Hashtag/Addtag';
 
 
 class JournalEntry extends Component {
-constructor(props) {
-    super(props);
-    this.state = {
-        currentTitle: '',
-        currentBody: '',
-        currentTag: '',
-        tags:[],
+    constructor(props) {
+        super(props);
+        this.state = {
+            currentTitle: '',
+            currentBody: '',
+            currentTag: '',
+            tags:[],
+            dataSnapshot: "",
+        }
     }
-}
+    componentDidMount = (props) => {
+        
+    };
 
-    //for button sending the new entry
+    //handler for button sending the new entry
     buttonClickHandler = () => {
         if (!this.state.currentTitle.length && !this.state.currentBody.length) {
             return;
         }
-
         //push inputs from textareas to database
         const rootRef = firebase.database().ref(`journalentries/${this.props.user.uid}`);
         rootRef.push({
@@ -35,7 +38,6 @@ constructor(props) {
             date: Date().toString(),
             tags: this.state.tags,
         });
-
         //empties the textareas
         this.setState({
             currentTitle:'',
