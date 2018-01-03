@@ -18,11 +18,31 @@ class JournalEntry extends Component {
             currentBody: '',
             currentTag: '',
             tags:[],
-            dataSnapshot: "",
+            allTags: [],
         }
     }
     componentDidMount = (props) => {
-        
+        //get tag data from database and write it to state
+        const rootRef = firebase.database().ref(`journalentries/${this.props.user.uid}`);
+        rootRef.on("value", snapshot => {
+            let userJournalEntries = snapshot.val(); 
+            let allTags = [];
+            for (let entry in userJournalEntries) {
+                //check that there is a tag in the entry
+                if (userJournalEntries[entry].tags && userJournalEntries[entry].tags.length){
+                    let tags = userJournalEntries[entry].tags;
+                    for (let tag in tags) {
+                        allTags.push(tags[tag]);
+                    }
+                }
+            }
+            //remove duplicates from allTags
+            let allUniqueTags = allTags.filter((tag, index, arr) => arr.indexOf(tag) === index);
+            //write the list of all unique tags across all entries to state
+            this.setState({
+                allTags: allUniqueTags
+            });
+        });
     };
 
     //handler for button sending the new entry
@@ -82,6 +102,20 @@ class JournalEntry extends Component {
             }
             return buttonStyle;
         };
+        //renders all new tags
+        let displayNewTags = this.state.tags.map((val, index) => {
+            return (
+            <Hashtag tagName={val} key={index} />
+            );            
+            } 
+        );
+        //renders the list of all tags
+        let displayTags = this.state.allTags.map((val, index) => {
+            return (
+            <Hashtag tagName={val} key={index} />
+            );            
+            } 
+        );
        
         return (
             <Aux >
@@ -90,6 +124,8 @@ class JournalEntry extends Component {
                                 <JournalTitle changedTitle ={this.titleHandler} text = {this.state.currentTitle}/>
                                 <JournalBody changedBody = {this.bodyHandler} text = {this.state.currentBody}/>
                                 <Addtag addTagClickHandler={this.addTagClickHandler} tagHandler={this.tagHandler} inputValue={this.state.currentTag}/>
+                                {displayNewTags}
+                                {displayTags}
                                 <Button clicked={this.buttonClickHandler} btnType={buttonStyleType()}>Save Entry</Button>
                         </div>
                     </div>

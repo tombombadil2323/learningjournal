@@ -6,8 +6,8 @@ const hashtag = (props) => {
 
     return (
         <Aux>
-        <div className='Tag' style={{marginTop:'0px', marginBottom:'0px'}}>
-        This is an old Tag</div>
+        <div className='Tag' style={{marginTop:'2px', marginBottom:'2px'}}>
+        {props.tagName}</div>
         </Aux>
     );
 };
