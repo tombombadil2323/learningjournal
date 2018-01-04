@@ -73,11 +73,11 @@ class JournalEntry extends Component {
     bodyHandler = (event) => {
         this.setState({currentBody: event.target.value});
     };
-
+    //update currentTag in state based on value entered in new tag input field
     tagHandler= (event) => {
         this.setState({currentTag: event.target.value});
     };
-
+    //updates the tags array in state with the currentTag value if the add tag button is clicked
     addTagClickHandler = ()=> {
         if (!this.state.currentTag.length) {
             return;
@@ -88,45 +88,77 @@ class JournalEntry extends Component {
             newState = prevState.tags;
             newState.push(this.state.currentTag);
             return {tags : newState};
-        }
+        }, ()=> console.log(this.state.tags)
     );
         this.setState({currentTag:''});
     };
-    
+    //add or remove toggle, connected to tags-state if the displayed hashtag is clicked 
+    tagClickToggleHandler = (tagName) => {
+        console.log(this.state.tags, tagName);
+        console.log(this.state.tags.indexOf(tagName));
+        if (this.state.tags.indexOf(tagName) > -1){
+            this.setState((prevState) => {
+                let newState = [];
+                newState = prevState.tags;
+                newState.splice(newState.indexOf(tagName),1);
+                console.log(newState);
+                return {tags: newState};
+            });
+        }
+        else {
+            this.setState((prevState) => {
+                let newState = [];
+                newState = prevState.tags;
+                newState.push(tagName);
+                return {tags: newState};
+            });
+        }
+    };
+
     render (){
         //formats the entry sending button 
-        const buttonStyleType = () => {
+        const saveButtonStyleType = () => {
             let buttonStyle = 'saveempty';
             if (this.state.currentTitle.length > 0 || this.state.currentBody.length > 0){
                 buttonStyle ='save';
             }
             return buttonStyle;
         };
+        //formats the tag button
+        const tagButtonStyleType = () => {
+            let buttonStyle = 'tagempty';
+            if (this.state.currentTag.length > 0){
+                buttonStyle ='tag';
+            }
+            return buttonStyle;
+        };
         //renders all new tags
         let displayNewTags = this.state.tags.map((val, index) => {
             return (
-            <Hashtag tagName={val} key={index} />
+            <Hashtag tagName={val} key={'newTag'+index} active clickedTag={this.tagClickToggleHandler}/>
             );            
             } 
         );
         //renders the list of all tags
         let displayTags = this.state.allTags.map((val, index) => {
             return (
-            <Hashtag tagName={val} key={index} />
+            <Hashtag tagName={val} key={index} clickedTag={this.tagClickToggleHandler}/>
             );            
             } 
         );
        
         return (
             <Aux >
-                   <div align='center' style={{marginTop: '70px'}}>
+                   <div align='center' style={{marginTop: '70px', marginBottom: '40px'}}>
                             <div className='w3-container w3-card-4 w3-light-grey ' style={{maxWidth: '1000px', paddingTop:'10px', paddingLeft:'0px', paddingRight:'0px'}}>                           
                                 <JournalTitle changedTitle ={this.titleHandler} text = {this.state.currentTitle}/>
                                 <JournalBody changedBody = {this.bodyHandler} text = {this.state.currentBody}/>
-                                <Addtag addTagClickHandler={this.addTagClickHandler} tagHandler={this.tagHandler} inputValue={this.state.currentTag}/>
-                                {displayNewTags}
-                                {displayTags}
-                                <Button clicked={this.buttonClickHandler} btnType={buttonStyleType()}>Save Entry</Button>
+                                <hr className='HorizontalRuler'/>
+                                <Addtag btnType={tagButtonStyleType()} addTagClickHandler={this.addTagClickHandler} tagHandler={this.tagHandler} inputValue={this.state.currentTag}/>
+                                <p>{displayNewTags}</p>
+                                <p>{displayTags}</p>
+                                <hr className='HorizontalRuler'/>
+                                <Button clicked={this.buttonClickHandler} btnType={saveButtonStyleType()}>Save Entry</Button>
                         </div>
                     </div>
             </Aux>

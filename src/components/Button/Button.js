@@ -23,11 +23,14 @@ const button = (props) => {
                 btnStyle = 'Button Remove';
                 break;
             case ('removeempty'):
-            btnStyle = 'Button RemoveEmpty';
-            break;
+                btnStyle = 'Button RemoveEmpty';
+                break;
+            case ('tagempty'):
+                btnStyle = 'Button TagButtonEmpty';
+                break;
             case ('tag'):
                 btnStyle = 'Button TagButton';
-            break;
+                break;
             default: 
                 btnStyle = 'Button';
                 break;
