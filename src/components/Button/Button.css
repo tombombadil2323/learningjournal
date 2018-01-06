@@ -46,11 +46,16 @@
     color: #ffffff;
     cursor: not-allowed;
 }
-.TagButton {
-    display: inline-flex;
+.TagButtonEmpty {
     background-color: lightgoldenrodyellow;
     color: black;
-    height: 26px;
-    margin: 0px;
     text-align: center;
+    margin-top: 2px;
+    cursor: not-allowed;
+}
+.TagButton {
+    background-color:  #FFD700;
+    color: black;
+    text-align: center;
+    margin-top: 2px;
 }

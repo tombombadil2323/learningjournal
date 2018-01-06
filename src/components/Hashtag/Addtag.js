@@ -1,15 +1,16 @@
 import React from 'react';
 import Aux from '../../hoc/Aux/Aux';
 import './Addtag.css';
+import Button from '../Button/Button';
+import '../../w3.css';
 
 const addtag = (props) => {
 
     return (
         <Aux>
-        <p></p>
-        <div style={{marginTop:'0px', marginBottom:'0px'}}>
-        <input type='text'style={{outerHeight:'10px'}}></input>
-        <div className='material-icons MyGreen md-36' font>check_circle</div>
+        <div className='w3-container' style={{marginTop:'0px', marginBottom:'0px', alignItems:'left'}}>
+        <input onChange={props.tagHandler} value={props.inputValue} className='w3-input w3-card-2' type='text' style={{display: 'inline-flex', marginTop: '2px'}} placeholder="Add a new tag..."></input>
+        <Button btnType={props.btnType} clicked={props.addTagClickHandler}>Add Tag</Button>
         </div>
         </Aux>
     );

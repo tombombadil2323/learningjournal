@@ -27,8 +27,8 @@ class JournalEntryPreview extends Component {
                     entryID: entry,
                     title: markDownEngine.render(entries[entry].title),
                     body: markDownEngine.render(entries[entry].body),
-                    bodyShort: entries[entry].body.toString().slice(0,200),
-                    date: entries[entry].date                 
+                    date: entries[entry].date,
+                    tags: entries[entry].tags,               
                 });
             }
             newState.reverse();
@@ -52,6 +52,7 @@ class JournalEntryPreview extends Component {
                                 entryID={entry.entryID}
                                 title ={entry.title} 
                                 date={entry.date.slice(0,16).toString()}
+                                tags={entry.tags}
                                 titleStyle={{
                                     textOverflow: 'ellipsis', 
                                     overflow: 'hidden', 

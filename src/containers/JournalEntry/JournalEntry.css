@@ -60,3 +60,14 @@
         vertical-align: top;
         font-weight: bold;
 }
+.HorizontalRuler { 
+    display: block;
+    margin-top: 5px;
+    margin-bottom: 2px;
+    margin-left: auto;
+    margin-right: auto;
+    border-style: inset;
+    border-width: 1px;
+    border-color: #ffffff;
+    color: #ffffff;
+}
