@@ -135,7 +135,7 @@ class JournalEntry extends Component {
         //renders all new tags
         let displayNewTags = this.state.tags.map((val, index) => {
             return (
-            <Hashtag tagName={val} key={'newTag'+index} active clickedTag={this.tagClickToggleHandler}/>
+            <Hashtag tagName={val} key={'newTag'+index} tagStyle='active' clickedTag={this.tagClickToggleHandler}/>
             );            
             } 
         );

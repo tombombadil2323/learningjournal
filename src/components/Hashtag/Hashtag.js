@@ -11,12 +11,12 @@ class Hashtag extends Component {
 
     activeSelector = () => {
         let tagStyle = '';
-        switch (this.props.active) {
-            case (true):
+        switch (this.props.tagStyle) {
+            case ('active'):
                 tagStyle = 'Tag Active';
                 break;
-            case (false):
-                tagStyle = 'Tag';
+            case ('display'):
+                tagStyle = 'Tag Display';
                 break;
             default:
                 tagStyle = 'Tag';

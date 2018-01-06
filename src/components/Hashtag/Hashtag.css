@@ -96,3 +96,44 @@
   .Active:hover::after {
      border-left-color: #FFD700; 
   }
+  .Display {
+    background: #FFD700;
+    border-radius: 3px 0 0 3px;
+    color: #000000;
+    display: inline-block;
+    height: 20px;
+    line-height: 18px;
+    padding: 0 20px 0 23px;
+    position: relative;
+    margin: 0 10px 10px 0;
+    text-decoration: none;
+  }
+  .Display::before {
+    background:#fdf5e6;
+    border-radius: 10px;
+    box-shadow: inset 0 1px rgba(0, 0, 0, 0.25);
+    content: '';
+    height: 6px;
+    left: 10px;
+    position: absolute;
+    width: 6px;
+    top: 10px;
+  }
+  .Display::after {
+    background: #fdf5e6;
+    border-bottom: 10px solid transparent;
+    border-left: 10px solid #FFD700;
+    border-top: 10px solid transparent;
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .Display:hover {
+    background-color: #FFD700;
+    color: white;
+  }
+  
+  .Display:hover::after {
+     border-left-color: #FFD700; 
+  }
