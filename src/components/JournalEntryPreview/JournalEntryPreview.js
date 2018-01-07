@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
-import firebase from '../../javascripts/firebase';
-import '../../w3.css';
-import Journal from '../Journal/Journal';
 import { Link } from 'react-router-dom';
-import Aux from '../../hoc/Aux/Aux';
+
 import Remarkable from 'remarkable';
+import firebase from '../../javascripts/firebase';
+
+import '../../w3.css';
+
+import Journal from '../Journal/Journal';
+import Aux from '../../hoc/Aux/Aux';
+
 
 class JournalEntryPreview extends Component {
     constructor(props) {

@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+
+import firebase from '../../javascripts/firebase';
+import Remarkable from 'remarkable';
+
 import './EntryView.css';
 import '../../w3.css';
+
 import JournalTitle from '../JournalEntryParts/JournalTitle/JournalTitle';
 import JournalBody from '../JournalEntryParts/JournalBody/JournalBody';
-import firebase from '../../javascripts/firebase';
-import { Link } from 'react-router-dom';
 import Journal from '../Journal/Journal';
 import Button from '../Button/Button';
 import Aux from '../../hoc/Aux/Aux';
-import Remarkable from 'remarkable';
 import Hashtag from '../Hashtag/Hashtag';
 import Addtag from '../Hashtag/Addtag';
 
