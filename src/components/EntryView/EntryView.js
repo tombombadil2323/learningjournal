@@ -165,7 +165,7 @@ class EntryView extends Component {
                 newState = prevState.tags;
                 newState.splice(newState.indexOf(tagName),1);
                 return {tags: newState, 
-                        prevTags:true};
+                        prevTags: true};
             });
         }
         else {
@@ -173,7 +173,8 @@ class EntryView extends Component {
                 let newState = [];
                 newState = prevState.tags;
                 newState.push(tagName);
-                return {tags: newState};
+                return {tags: newState, 
+                        prevTags: true};
             });
         }
     };
@@ -228,13 +229,6 @@ class EntryView extends Component {
             return buttonStyle;
         };
         // //renders all new tags
-        // let displayNewTags = this.state.tags.map((val, index) => {
-        //     return (
-        //     <Hashtag tagName={val} key={'newTag'+index} tagStyle='active' clickedTag={this.tagClickToggleHandler}/>
-        //     );            
-        //     } 
-        // );
-        //renders the list of all tags
         let displayTags = this.state.allTags.map((val, index) => {
             return (
             <Hashtag tagName={val} key={index} clickedTag={this.tagClickToggleHandler}/>

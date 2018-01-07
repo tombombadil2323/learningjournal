@@ -54,7 +54,7 @@ class Journal extends Component {
                             dangerouslySetInnerHTML={{__html: this.props.body}}        
                     >
                     </div>
-                    {hashtags}
+                    <div>{hashtags}</div>
                 </div>        
             </Aux>
             );        

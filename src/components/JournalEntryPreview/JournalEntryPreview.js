@@ -39,11 +39,11 @@ class JournalEntryPreview extends Component {
     }
 
     render() {
-         //displays the list of entries with remove button
+         //displays the list of entries with tags
          const joined = this.state.entry.map((entry)=>{            
             return (
                 <div key={entry.entryID}>
-                    <div className='w3-card-4 w3-light-grey' align='center' style={{paddingTop:'2px', paddingBottom:'2px', maxWidth: '1000px', textOverflow: 'ellipsis'}}>
+                    <div className='w3-card-4 w3-light-grey' align='center' style={{paddingTop:'2px', paddingBottom:'2px', maxWidth: '1000px'}}>
                         <Link to={{
                         pathname:'/journalentryview',
                         state:{entryID: entry.entryID}
@@ -53,11 +53,11 @@ class JournalEntryPreview extends Component {
                                 title ={entry.title} 
                                 date={entry.date.slice(0,16).toString()}
                                 tags={entry.tags}
-                                titleStyle={{
-                                    textOverflow: 'ellipsis', 
-                                    overflow: 'hidden', 
-                                    whiteSpace: 'nowrap', 
-                                    maxHeight:'70px',
+                                titleStyle={{        
+                                    overflow: 'hidden',
+                                    whiteSpace: 'pre-wrap',
+                                    textAlign:'left',
+                                    height: '100%',
                                     fontStyle: 'italic',
                                 }}
                             />                              
