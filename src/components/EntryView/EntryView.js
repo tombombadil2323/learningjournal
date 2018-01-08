@@ -33,6 +33,7 @@ class EntryView extends Component {
             tags: [],
             currentTag: '',
             allTags: [],
+            accordionToggle: false,
         }
     }
     componentDidMount = () => {
@@ -181,6 +182,21 @@ class EntryView extends Component {
             });
         }
     };
+    accordionClickToggle = ()=>{
+        this.setState((prevState)=>{
+            return {accordionToggle: !prevState.accordionToggle};
+        });
+        // this.setState((prevState)=>{
+        //     return (prevState.panelMaxHeight === '100%'? {panelMaxHeight:'0'}: {panelMaxHeight: '100%'});
+        // });
+    };
+
+    accordionDisplayToggle = ()=>{
+        if (this.state.accordionToggle){
+            return "Expanded";
+        }
+        else return "Accordion";
+    };
     render(){
         //formats the entry sending button 
         const saveButtonStyleType = () => {
@@ -246,9 +262,13 @@ class EntryView extends Component {
                                 <div className='w3-container w3-card-4 w3-light-grey ' style={{maxWidth: '1000px', paddingTop:'10px', paddingLeft:'0px', paddingRight:'0px'}}>
                                     <JournalTitle changedTitle ={this.titleHandler} text = {this.state.currentTitle} />
                                     <JournalBody changedBody = {this.bodyHandler} text = {this.state.currentBody}/>
-                                    {entryEditTags}
-                                    <Addtag btnType={tagButtonStyleType()} addTagClickHandler={this.addTagClickHandler} tagHandler={this.tagHandler} inputValue={this.state.currentTag}/>
-                                    <div>{displayTags}</div>
+                                    <div style={{marginTop:'10px'}}>{entryEditTags}</div>
+                                    <button className={this.accordionDisplayToggle()} onClick={this.accordionClickToggle}><strong>Edit Tags..</strong></button>
+                                    <div className='Panel' style={this.state.accordionToggle ? {maxHeight:'2000px'}: {maxHeight:null}}>
+                                        <Addtag btnType={tagButtonStyleType()} addTagClickHandler={this.addTagClickHandler} tagHandler={this.tagHandler} inputValue={this.state.currentTag}/>
+                                        <div style={{marginTop:'10px'}}>{displayTags}</div>
+                                        <hr className='HorizontalRuler'/>
+                                    </div> 
                                     <div className='w3-container' style={{display: 'block'}}>                                            
                                         <div style={{margin:'5px', display: 'inline-block'}}>
                                             <Button clicked={this.buttonClickHandler} btnType={saveButtonStyleType()}>Update</Button>

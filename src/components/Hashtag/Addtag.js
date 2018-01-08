@@ -8,8 +8,8 @@ const addtag = (props) => {
 
     return (
         <Aux>
-        <div className='w3-container' style={{marginTop:'0px', marginBottom:'0px', alignItems:'left'}}>
-        <input onChange={props.tagHandler} value={props.inputValue} className='w3-input w3-card-2' type='text' style={{display: 'inline-flex', marginTop: '2px'}} placeholder="Add a new tag..."></input>
+        <div className='w3-container' style={{marginTop:'2px', marginBottom:'2px', alignItems:'left'}}>
+        <input onChange={props.tagHandler} value={props.inputValue} className='w3-input w3-card-2' type='text' style={{display: 'inline-flex', marginTop: '2px', marginBottom:'2px'}} placeholder="Add a new tag..."></input>
         <Button btnType={props.btnType} clicked={props.addTagClickHandler}>Add Tag</Button>
         </div>
         </Aux>
