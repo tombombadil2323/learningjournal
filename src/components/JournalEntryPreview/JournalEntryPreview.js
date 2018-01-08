@@ -60,7 +60,7 @@ class JournalEntryPreview extends Component {
                                 titleStyle={{        
                                     overflow: 'hidden',
                                     whiteSpace: 'pre-wrap',
-                                    textAlign:'left',
+                                    textAlign:'center',
                                     height: '100%',
                                     fontStyle: 'italic',
                                 }}
