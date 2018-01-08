@@ -19,6 +19,7 @@ class JournalEntry extends Component {
             currentTag: '',
             tags:[],
             allTags: [],
+            accordionToggle: false,
         }
     }
     componentDidMount = (props) => {
@@ -88,20 +89,16 @@ class JournalEntry extends Component {
             newState = prevState.tags;
             newState.push(this.state.currentTag);
             return {tags : newState};
-        }, ()=> console.log(this.state.tags)
-    );
+        });
         this.setState({currentTag:''});
     };
     //add or remove toggle, connected to tags-state if the displayed hashtag is clicked 
     tagClickToggleHandler = (tagName) => {
-        console.log(this.state.tags, tagName);
-        console.log(this.state.tags.indexOf(tagName));
         if (this.state.tags.indexOf(tagName) > -1){
             this.setState((prevState) => {
                 let newState = [];
                 newState = prevState.tags;
                 newState.splice(newState.indexOf(tagName),1);
-                console.log(newState);
                 return {tags: newState};
             });
         }
@@ -113,6 +110,18 @@ class JournalEntry extends Component {
                 return {tags: newState};
             });
         }
+    };
+    accordionClickToggle = ()=>{
+        this.setState((prevState)=>{
+            return {accordionToggle: !prevState.accordionToggle};
+        },()=>console.log(this.state.accordionToggle));
+    };
+
+    accordionDisplayToggle = ()=>{
+        if (this.state.accordionToggle){
+            return "Expanded";
+        }
+        else return "Accordion";
     };
 
     render (){
@@ -150,14 +159,16 @@ class JournalEntry extends Component {
         return (
             <Aux >
                    <div align='center' style={{marginTop: '70px', marginBottom: '40px'}}>
-                            <div className='w3-container w3-card-4 w3-light-grey ' style={{maxWidth: '1000px', paddingTop:'10px', paddingLeft:'0px', paddingRight:'0px'}}>                           
+                            <div className='w3-container w3-card-4 w3-light-grey JournalEntry' style={{maxWidth: '1000px', paddingTop:'10px', paddingLeft:'0px', paddingRight:'0px'}}>                           
                                 <JournalTitle changedTitle ={this.titleHandler} text = {this.state.currentTitle}/>
                                 <JournalBody changedBody = {this.bodyHandler} text = {this.state.currentBody}/>
-                                <hr className='HorizontalRuler'/>
-                                <Addtag btnType={tagButtonStyleType()} addTagClickHandler={this.addTagClickHandler} tagHandler={this.tagHandler} inputValue={this.state.currentTag}/>
-                                <p>{displayNewTags}</p>
-                                <p>{displayTags}</p>
-                                <hr className='HorizontalRuler'/>
+                                <button className={this.accordionDisplayToggle()} onClick={this.accordionClickToggle}><strong>Add Tags..</strong></button>
+                                <div className='Panel' style={this.state.accordionToggle ? {display: 'block'}: {display: 'none'}}>
+                                    <div>{displayNewTags}</div>
+                                    <Addtag btnType={tagButtonStyleType()} addTagClickHandler={this.addTagClickHandler} tagHandler={this.tagHandler} inputValue={this.state.currentTag}/>
+                                    <div>{displayTags}</div>
+                                    <hr className='HorizontalRuler'/>
+                                </div> 
                                 <Button clicked={this.buttonClickHandler} btnType={saveButtonStyleType()}>Save Entry</Button>
                         </div>
                     </div>
