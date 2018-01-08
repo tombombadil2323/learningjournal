@@ -20,6 +20,7 @@ class JournalEntry extends Component {
             tags:[],
             allTags: [],
             accordionToggle: false,
+            panelMaxHeight: "",
         }
     }
     componentDidMount = (props) => {
@@ -114,7 +115,10 @@ class JournalEntry extends Component {
     accordionClickToggle = ()=>{
         this.setState((prevState)=>{
             return {accordionToggle: !prevState.accordionToggle};
-        },()=>console.log(this.state.accordionToggle));
+        });
+        // this.setState((prevState)=>{
+        //     return (prevState.panelMaxHeight === '100%'? {panelMaxHeight:'0'}: {panelMaxHeight: '100%'});
+        // });
     };
 
     accordionDisplayToggle = ()=>{
@@ -163,10 +167,10 @@ class JournalEntry extends Component {
                                 <JournalTitle changedTitle ={this.titleHandler} text = {this.state.currentTitle}/>
                                 <JournalBody changedBody = {this.bodyHandler} text = {this.state.currentBody}/>
                                 <button className={this.accordionDisplayToggle()} onClick={this.accordionClickToggle}><strong>Add Tags..</strong></button>
-                                <div className='Panel' style={this.state.accordionToggle ? {display: 'block'}: {display: 'none'}}>
+                                <div className='Panel' style={this.state.accordionToggle ? {maxHeight:'2000px'}: {maxHeight:null}}>
                                     <div>{displayNewTags}</div>
                                     <Addtag btnType={tagButtonStyleType()} addTagClickHandler={this.addTagClickHandler} tagHandler={this.tagHandler} inputValue={this.state.currentTag}/>
-                                    <div>{displayTags}</div>
+                                    <div style={{marginTop:'10px'}}>{displayTags}</div>
                                     <hr className='HorizontalRuler'/>
                                 </div> 
                                 <Button clicked={this.buttonClickHandler} btnType={saveButtonStyleType()}>Save Entry</Button>
