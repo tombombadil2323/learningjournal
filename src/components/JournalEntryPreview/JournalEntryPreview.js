@@ -8,6 +8,7 @@ import '../../w3.css';
 
 import Journal from '../Journal/Journal';
 import Aux from '../../hoc/Aux/Aux';
+import Accordion from '../../hoc/Accordion/Accordion';
 
 
 class JournalEntryPreview extends Component {
@@ -15,6 +16,7 @@ class JournalEntryPreview extends Component {
         super(props);
         this.state = {
             entry: [],
+            accordionToggle: false,
         }
     }
     componentDidMount() {
@@ -41,7 +43,21 @@ class JournalEntryPreview extends Component {
             });
         });
     }
+    accordionClickToggle = ()=>{
+        this.setState((prevState)=>{
+            return {accordionToggle: !prevState.accordionToggle};
+        });
+        // this.setState((prevState)=>{
+        //     return (prevState.panelMaxHeight === '100%'? {panelMaxHeight:'0'}: {panelMaxHeight: '100%'});
+        // });
+    };
 
+    accordionDisplayToggle = ()=>{
+        if (this.state.accordionToggle){
+            return "Expanded";
+        }
+        else return "Accordion";
+    };
     render() {
          //displays the list of entries with tags
          const joined = this.state.entry.map((entry)=>{            
@@ -74,7 +90,17 @@ class JournalEntryPreview extends Component {
         return (
             <Aux>
                 <div align='center' style={{marginTop: '70px', marginBottom: '30px'}}>
-                    <div style={{maxWidth: '1000px'}} align='center' >{joined}</div>
+                    <div style={{marginBottom: '5px'}}>
+                        <Accordion 
+                            accordionDisplayToggle={this.accordionDisplayToggle()} 
+                            accordionClickToggle={this.accordionClickToggle}
+                            accordionToggle={this.state.accordionToggle}
+                            buttonText={'Filter by Tags...'}
+                        >
+                            Test
+                        </Accordion>
+                    </div>
+                    <div style={{maxWidth: '1000px'}} align='center'>{joined}</div>
                 </div> 
             </Aux>       
         );

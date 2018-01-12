@@ -7,7 +7,8 @@ import JournalBody from '../../components/JournalEntryParts/JournalBody/JournalB
 import Button from '../../components/Button/Button';
 import firebase from '../../javascripts/firebase';
 import Hashtag from '../../components/Hashtag/Hashtag';
-import Addtag from '../../components/Hashtag/Addtag';
+import AddTags from '../../components/AddTags/AddTags';
+import Accordion from '../../hoc/Accordion/Accordion';
 
 
 class JournalEntry extends Component {
@@ -164,16 +165,33 @@ class JournalEntry extends Component {
             <Aux >
                    <div align='center' style={{marginTop: '70px', marginBottom: '40px'}}>
                             <div className='w3-container w3-card-4 w3-light-grey JournalEntry' style={{maxWidth: '1000px', paddingTop:'10px', paddingLeft:'0px', paddingRight:'0px'}}>                           
-                                <JournalTitle changedTitle ={this.titleHandler} text = {this.state.currentTitle}/>
-                                <JournalBody changedBody = {this.bodyHandler} text = {this.state.currentBody}/>
-                                <button className={this.accordionDisplayToggle()} onClick={this.accordionClickToggle}><strong>Add Tags..</strong></button>
-                                <div className='Panel' style={this.state.accordionToggle ? {maxHeight:'2000px'}: {maxHeight:null}}>
-                                    <div>{displayNewTags}</div>
-                                    <Addtag btnType={tagButtonStyleType()} addTagClickHandler={this.addTagClickHandler} tagHandler={this.tagHandler} inputValue={this.state.currentTag}/>
-                                    <div style={{marginTop:'10px'}}>{displayTags}</div>
-                                    <hr className='HorizontalRuler'/>
-                                </div> 
-                                <Button clicked={this.buttonClickHandler} btnType={saveButtonStyleType()}>Save Entry</Button>
+                                <JournalTitle 
+                                    changedTitle ={this.titleHandler} 
+                                    text = {this.state.currentTitle}/>
+                                <JournalBody 
+                                    changedBody = {this.bodyHandler} 
+                                    text = {this.state.currentBody}/>
+                                <Accordion
+                                    accordionDisplayToggle={this.accordionDisplayToggle()} 
+                                    accordionClickToggle={this.accordionClickToggle}
+                                    accordionToggle={this.state.accordionToggle}
+                                    buttonText={'Add Tags...'}
+                                >
+                                    <AddTags 
+                                        displayNewTags={displayNewTags}
+                                        tagButtonStyleType={tagButtonStyleType()}
+                                        addTagClickHandler={this.addTagClickHandler} 
+                                        tagHandler={this.tagHandler} 
+                                        currentTag={this.state.currentTag}
+                                        displayTags={displayTags}
+                                    />
+                                </Accordion>
+                                
+                                <Button 
+                                    clicked={this.buttonClickHandler} 
+                                    btnType={saveButtonStyleType()}>
+                                    Save Entry
+                                </Button>
                         </div>
                     </div>
             </Aux>
