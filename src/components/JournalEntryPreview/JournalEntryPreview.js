@@ -9,6 +9,7 @@ import '../../w3.css';
 import Journal from '../Journal/Journal';
 import Aux from '../../hoc/Aux/Aux';
 import Accordion from '../../hoc/Accordion/Accordion';
+import Hashtag from '../Hashtag/Hashtag';
 
 
 class JournalEntryPreview extends Component {
@@ -16,6 +17,7 @@ class JournalEntryPreview extends Component {
         super(props);
         this.state = {
             entry: [],
+            tags: [],
             accordionToggle: false,
         }
     }
@@ -26,6 +28,8 @@ class JournalEntryPreview extends Component {
             //new simplified code:
             let entries = snapshot.val(); 
             let newState = [];
+            let allTags = [];
+            //define and configure Remarkable Library
             let markDownEngine = new Remarkable();
             markDownEngine.set({linkify: true,});
             for (let entry in entries) {    
@@ -36,10 +40,15 @@ class JournalEntryPreview extends Component {
                     date: entries[entry].date,
                     tags: entries[entry].tags,               
                 });
+                allTags.push(entries[entry].tags);
             }
             newState.reverse();
             this.setState({
                 entry: newState
+            });
+            let uniqueTags = allTags.filter((tag, index, arr) => arr.indexOf(tag) === index);
+            this.setState({
+                tags: uniqueTags
             });
         });
     }
@@ -57,6 +66,25 @@ class JournalEntryPreview extends Component {
             return "Expanded";
         }
         else return "Accordion";
+    };
+    //add or remove toggle, connected to tags-state if the displayed hashtag is clicked 
+    tagClickToggleHandler = (tagName) => {
+        if (this.state.tags.indexOf(tagName) > -1){
+            this.setState((prevState) => {
+                let newState = [];
+                newState = prevState.tags;
+                newState.splice(newState.indexOf(tagName),1);
+                return {tags: newState};
+            });
+        }
+        else {
+            this.setState((prevState) => {
+                let newState = [];
+                newState = prevState.tags;
+                newState.push(tagName);
+                return {tags: newState};
+            });
+        }
     };
     render() {
          //displays the list of entries with tags
@@ -87,20 +115,39 @@ class JournalEntryPreview extends Component {
                 </div>
             );
         });
+        //displays all tags
+        const displayAllTags = this.state.tags.map((tag, index)=>{
+            return (
+                <Hashtag 
+                    tagName={tag} 
+                    key={index} 
+                    clickedTag={this.tagClickToggleHandler}/>
+            );
+            }
+        );
         return (
             <Aux>
-                <div align='center' style={{marginTop: '70px', marginBottom: '30px'}}>
-                    <div style={{marginBottom: '5px'}}>
+                <div 
+                    align='center' 
+                    style={{
+                        marginTop: '70px', 
+                        marginBottom: '30px'}}>
+                    <div style={{
+                            marginBottom: '5px', 
+                            maxWidth: '1000px'}}>
                         <Accordion 
                             accordionDisplayToggle={this.accordionDisplayToggle()} 
                             accordionClickToggle={this.accordionClickToggle}
                             accordionToggle={this.state.accordionToggle}
-                            buttonText={'Filter by Tags...'}
-                        >
-                            Test
+                            buttonText={'Filter by Tags...'}>
+                                {displayAllTags}
                         </Accordion>
                     </div>
-                    <div style={{maxWidth: '1000px'}} align='center'>{joined}</div>
+                    <div 
+                        style={{maxWidth: '1000px'}} 
+                        align='center'>
+                            {joined}
+                    </div>
                 </div> 
             </Aux>       
         );

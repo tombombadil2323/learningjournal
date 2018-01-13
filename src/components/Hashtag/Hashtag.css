@@ -10,7 +10,7 @@
   }
   
   .Tag {
-    background: lightgoldenrodyellow;
+    background: #fff9d8;
     border-radius: 3px 0 0 3px;
     color: #999;
     display: inline-block;
@@ -38,7 +38,7 @@
   .Tag::after {
     background: #f1f1f1;
     border-bottom: 20px solid transparent;
-    border-left: 10px solid lightgoldenrodyellow;
+    border-left: 10px solid #fff9d8;
     border-top: 20px solid transparent;
     content: '';
     position: absolute;
@@ -47,16 +47,16 @@
   }
   
   .Tag:hover {
-    background-color: lightgoldenrodyellow;
+    background-color: #fff9d8;
     color: white;
   }
   
   .Tag:hover::after {
-     border-left-color: lightgoldenrodyellow; 
+     border-left-color: #fff9d8; 
   }
 
   .Active {
-    background: #FFD700;
+    background: #ffe976;
     border-radius: 3px 0 0 3px;
     color: #000000;
     display: inline-block;
@@ -81,7 +81,7 @@
   .Active::after {
     background: #f1f1f1;
     border-bottom: 20px solid transparent;
-    border-left: 10px solid #FFD700;
+    border-left: 10px solid #ffe976;
     border-top: 20px solid transparent;
     content: '';
     position: absolute;
@@ -89,15 +89,15 @@
     top: 0;
   }
   .Active:hover {
-    background-color: #FFD700;
+    background-color: #ffe976;
     color: white;
   }
   
   .Active:hover::after {
-     border-left-color: #FFD700; 
+     border-left-color: #ffe976; 
   }
   .Display {
-    background: #FFD700;
+    background: #ffe976;
     border-radius: 3px 0 0 3px;
     color: #000000;
     display: inline-block;
@@ -122,7 +122,7 @@
   .Display::after {
     background: #fdf5e6;
     border-bottom: 10px solid transparent;
-    border-left: 10px solid #FFD700;
+    border-left: 10px solid #ffe976;
     border-top: 10px solid transparent;
     content: '';
     position: absolute;
@@ -130,10 +130,10 @@
     top: 0;
   }
   .Display:hover {
-    background-color: #FFD700;
+    background-color: #ffe976;
     color: white;
   }
   
   .Display:hover::after {
-     border-left-color: #FFD700; 
+     border-left-color: #ffe976; 
   }

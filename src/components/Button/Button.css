@@ -47,14 +47,14 @@
     cursor: not-allowed;
 }
 .TagButtonEmpty {
-    background-color: lightgoldenrodyellow;
+    background-color: #fff9d8;
     color: black;
     text-align: center;
     margin-top: 2px;
     cursor: not-allowed;
 }
 .TagButton {
-    background-color:  #FFD700;
+    background-color:  #ffe976;
     color: black;
     text-align: center;
     margin-top: 2px;

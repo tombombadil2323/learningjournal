@@ -13,7 +13,7 @@
 }
 
 .Expanded {
-    background-color: #FFD700;
+    background-color: #ffe976;
     color: #444;
     cursor: pointer;
     padding: 18px;
@@ -27,7 +27,7 @@
 
 /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
 .Accordion:hover {
-    background-color: #FFD700;
+    background-color: #ffe976;
 }
 .Accordion:after {
     content: '\02795'; /* Unicode character for "plus" sign (+) */
@@ -51,4 +51,5 @@
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.2s ease-in-out;
+    background-color: #f1f1f1;
 }
