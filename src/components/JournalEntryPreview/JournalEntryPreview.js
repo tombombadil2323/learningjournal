@@ -18,7 +18,10 @@ class JournalEntryPreview extends Component {
         this.state = {
             entry: [],
             tags: [],
+            activeTags: [],
             accordionToggle: false,
+            activeTagEntry:[],
+            activeTagToggle: false,
         }
     }
     componentDidMount() {
@@ -40,7 +43,10 @@ class JournalEntryPreview extends Component {
                     date: entries[entry].date,
                     tags: entries[entry].tags,               
                 });
-                allTags.push(entries[entry].tags);
+                let tags = entries[entry].tags;
+                    for (let tag in tags) {
+                        allTags.push(tags[tag]);
+                    }
             }
             newState.reverse();
             this.setState({
@@ -52,6 +58,29 @@ class JournalEntryPreview extends Component {
             });
         });
     }
+
+    componentDidUpdate(prevProps, prevState){
+        //executes if tags were updated
+        if (this.state.activeTagToggle !== prevState.activeTagToggle){
+            let activeTags = this.state.activeTags;
+            let entries = this.state.entry;
+            let activeTagEntry = [];
+            entries.map((entry) => {
+                if (typeof entry.tags !== 'undefined'){
+                    activeTags.forEach((tag) => {
+                        if (entry.tags.indexOf(tag[0]) !== -1){
+                            activeTagEntry.push(entry);
+                        }
+                    });
+                }
+                return null;
+            }); 
+            activeTagEntry = activeTagEntry.filter((entry, index, arr) => arr.indexOf(entry) === index);
+            console.log(activeTagEntry);
+            this.setState({activeTagEntry, activeTagToggle:false});
+        }
+    }
+
     accordionClickToggle = ()=>{
         this.setState((prevState)=>{
             return {accordionToggle: !prevState.accordionToggle};
@@ -70,52 +99,103 @@ class JournalEntryPreview extends Component {
     //add or remove toggle, connected to tags-state if the displayed hashtag is clicked 
     tagClickToggleHandler = (tagName) => {
         if (this.state.tags.indexOf(tagName) > -1){
-            this.setState((prevState) => {
-                let newState = [];
-                newState = prevState.tags;
-                newState.splice(newState.indexOf(tagName),1);
-                return {tags: newState};
+            this.setState((prevState)=>{
+                let newTags = prevState.tags;
+                let activeTag = newTags.splice(newTags.indexOf(tagName),1);
+                let activeTags = prevState.activeTags;
+                activeTags.push(activeTag);
+                return ({
+                    tags: newTags,
+                    activeTags
+                });
             });
         }
         else {
-            this.setState((prevState) => {
-                let newState = [];
-                newState = prevState.tags;
-                newState.push(tagName);
-                return {tags: newState};
+            this.setState((prevState)=>{
+                let newTags = prevState.tags;
+                let activeTags = prevState.activeTags;
+                let deactiveTag = activeTags.splice(activeTags.indexOf(tagName),1);
+                newTags.push(deactiveTag);
+                return ({
+                    tags: newTags,
+                    activeTags
+                });
             });
         }
-    };
-    render() {
-         //displays the list of entries with tags
-         const joined = this.state.entry.map((entry)=>{            
-            return (
-                <div key={entry.entryID}>
-                    <div className='w3-card-4 w3-light-grey' align='center' style={{paddingTop:'2px', paddingBottom:'2px', maxWidth: '1000px'}}>
-                        <Link to={{
-                        pathname:'/journalentryview',
-                        state:{entryID: entry.entryID}
-                        }} style={{textDecoration:'none'}}>
-                            <Journal
-                                entryID={entry.entryID}
-                                title ={entry.title} 
-                                date={entry.date.slice(0,16).toString()}
-                                tags={entry.tags}
-                                titleStyle={{        
-                                    overflow: 'hidden',
-                                    whiteSpace: 'pre-wrap',
-                                    textAlign:'center',
-                                    height: '100%',
-                                    fontStyle: 'italic',
-                                }}
-                            />                              
-                        </Link>         
-                    </div>
-                    <p></p>                                                 
-                </div>
-            );
+        this.setState((prevState)=>{
+            return {activeTagToggle: !prevState.activeTagToggle}
         });
-        //displays all tags
+    };
+    render() {        
+        //displays the list of entries with tags
+        const joined = this.state.activeTagEntry.length > 0 ? 
+            this.state.activeTagEntry.map((entry)=>{
+                return (
+                    <div key={entry.entryID}>
+                        <div className='w3-card-4 w3-light-grey' align='center' style={{paddingTop:'2px', paddingBottom:'2px', maxWidth: '1000px'}}>
+                            <Link to={{
+                            pathname:'/journalentryview',
+                            state:{entryID: entry.entryID}
+                            }} style={{textDecoration:'none'}}>
+                                <Journal
+                                    entryID={entry.entryID}
+                                    title ={entry.title} 
+                                    date={entry.date.slice(0,16).toString()}
+                                    tags={entry.tags}
+                                    titleStyle={{        
+                                        overflow: 'hidden',
+                                        whiteSpace: 'pre-wrap',
+                                        textAlign:'center',
+                                        height: '100%',
+                                        fontStyle: 'italic',
+                                    }}
+                                />                              
+                            </Link>         
+                        </div>
+                        <p></p>                                                 
+                    </div>
+                );
+            }) 
+            : 
+            this.state.entry.map((entry)=>{
+                return (
+                    <div key={entry.entryID}>
+                        <div className='w3-card-4 w3-light-grey' align='center' style={{paddingTop:'2px', paddingBottom:'2px', maxWidth: '1000px'}}>
+                            <Link to={{
+                            pathname:'/journalentryview',
+                            state:{entryID: entry.entryID}
+                            }} style={{textDecoration:'none'}}>
+                                <Journal
+                                    entryID={entry.entryID}
+                                    title ={entry.title} 
+                                    date={entry.date.slice(0,16).toString()}
+                                    tags={entry.tags}
+                                    titleStyle={{        
+                                        overflow: 'hidden',
+                                        whiteSpace: 'pre-wrap',
+                                        textAlign:'center',
+                                        height: '100%',
+                                        fontStyle: 'italic',
+                                    }}
+                                />                              
+                            </Link>         
+                        </div>
+                        <p></p>                                                 
+                    </div>
+                );
+            });
+        //displays all active tags
+        const displayAllActiveTags = this.state.activeTags.map((tag, index)=>{
+            return (
+                <Hashtag 
+                    tagName={tag} 
+                    key={index} 
+                    clickedTag={this.tagClickToggleHandler}
+                    tagStyle='active'/>
+            );
+            }
+        );
+        //displays all non active tags
         const displayAllTags = this.state.tags.map((tag, index)=>{
             return (
                 <Hashtag 
@@ -140,7 +220,7 @@ class JournalEntryPreview extends Component {
                             accordionClickToggle={this.accordionClickToggle}
                             accordionToggle={this.state.accordionToggle}
                             buttonText={'Filter by Tags...'}>
-                                {displayAllTags}
+                                {displayAllActiveTags}{displayAllTags}
                         </Accordion>
                     </div>
                     <div 

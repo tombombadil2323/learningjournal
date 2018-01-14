@@ -4,7 +4,6 @@ import './Accordion.css';
 
 
 const accordion = (props) => {
-    console.log(props);
     return (
         <Aux>
             <button className={props.accordionDisplayToggle} onClick={props.accordionClickToggle}><strong>{props.buttonText}</strong></button>
