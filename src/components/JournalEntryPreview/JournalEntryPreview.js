@@ -76,7 +76,6 @@ class JournalEntryPreview extends Component {
                 return null;
             }); 
             activeTagEntry = activeTagEntry.filter((entry, index, arr) => arr.indexOf(entry) === index);
-            console.log(activeTagEntry);
             this.setState({activeTagEntry, activeTagToggle:false});
         }
     }
@@ -85,9 +84,6 @@ class JournalEntryPreview extends Component {
         this.setState((prevState)=>{
             return {accordionToggle: !prevState.accordionToggle};
         });
-        // this.setState((prevState)=>{
-        //     return (prevState.panelMaxHeight === '100%'? {panelMaxHeight:'0'}: {panelMaxHeight: '100%'});
-        // });
     };
 
     accordionDisplayToggle = ()=>{
